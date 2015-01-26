@@ -1,5 +1,5 @@
-package application.main;
-	
+package application.url;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -8,7 +8,7 @@ import javafx.fxml.FXMLLoader;
 
 //Test
 
-public class Main extends Application {
+public class Url extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -26,3 +26,4 @@ public class Main extends Application {
 		launch(args);
 	}
 }
+
