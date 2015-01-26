@@ -1,4 +1,4 @@
-package application.Main;
+package application.main;
 
 public class MainController {
 	
