@@ -1,4 +1,4 @@
-package url;
+package application.url;
 
 public class UrlController {
 
