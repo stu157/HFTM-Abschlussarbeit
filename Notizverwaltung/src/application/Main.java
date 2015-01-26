@@ -20,6 +20,7 @@ public class Main extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		start.
 	}
 	
 	public static void main(String[] args) {
