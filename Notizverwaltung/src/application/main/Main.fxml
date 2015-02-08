@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
+<?import application.note.NoteController?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="application.NoteController">
-	<!-- TODO Add Nodes -->
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="635.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.main.MainController">
+   <left>
+      <AnchorPane minHeight="400.0" minWidth="300.0" prefHeight="400.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+         <children>
+            <ScrollPane minHeight="335.0" minWidth="300.0" prefHeight="335.0" prefWidth="300.0" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <content>
+                <AnchorPane minHeight="335.0" minWidth="300.0" prefHeight="335.0" prefWidth="300.0">
+                     <children>
+                        <ListView fx:id="NotesList" layoutX="25.0" layoutY="22.0" minHeight="335.0" minWidth="300.0" prefHeight="335.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+            <Button fx:id="NewNote" layoutX="14.0" layoutY="351.0" minHeight="25.0" minWidth="100.0" mnemonicParsing="false" onAction="#NewNoteCommand" prefHeight="25.0" prefWidth="100.0" text="Neue Notiz" AnchorPane.leftAnchor="14.0" />
+            <Button fx:id="DeleteNote" layoutX="186.0" layoutY="351.0" minHeight="25.0" minWidth="100.0" mnemonicParsing="false" onAction="#DeleteNoteCommand" prefHeight="25.0" prefWidth="100.0" text="Lösche Notiz" AnchorPane.rightAnchor="14.0" />
+         </children>
+      </AnchorPane>
+   </left>
+   <!--<center>
+   		<NoteController fx:id="ActiveNote" prefHeight="424.0" prefWidth="470.0"></NoteController>
+ 	</center>-->
 </BorderPane>
-
