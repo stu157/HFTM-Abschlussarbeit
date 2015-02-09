@@ -24,7 +24,24 @@
          </children>
       </AnchorPane>
    </left>
-   <!--<center>
-   		<NoteController fx:id="ActiveNote" prefHeight="424.0" prefWidth="470.0"></NoteController>
- 	</center>-->
+   <center>
+		<BorderPane prefHeight="424.0" prefWidth="470.0">
+			<center>
+				<AnchorPane prefHeight="317.0" prefWidth="393.0" BorderPane.alignment="CENTER">
+		         	<children>
+		            	<TextArea fx:id="NoteContent" prefHeight="317.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+		         	</children>
+		      	</AnchorPane>
+		   	</center>
+		   	<top>
+		      	<Label fx:id="Title" prefHeight="17.0" prefWidth="400.0" text="Titel" BorderPane.alignment="TOP_LEFT" />
+		   	</top>
+		   	<right>
+		      	<ListView fx:id="NoteImagesList" prefHeight="317.0" prefWidth="120.0" BorderPane.alignment="CENTER" />
+		   	</right>
+		   	<bottom>
+		      	<ListView fx:id="NoteUrlList" prefHeight="90.0" prefWidth="674.0" BorderPane.alignment="CENTER" />
+		   	</bottom>
+		</BorderPane>
+ 	</center>
 </BorderPane>

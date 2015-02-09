@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<fx:root type="javadx.scene.layout.BorderPane" xlmns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx/8">
-<!--<BorderPane prefHeight="424.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NoteController">-->
+<BorderPane prefHeight="424.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NoteController">-->
    <center>
       <AnchorPane prefHeight="317.0" prefWidth="393.0" BorderPane.alignment="CENTER">
          <children>
@@ -23,4 +22,4 @@
    <bottom>
       <ListView fx:id="NoteUrlList" prefHeight="90.0" prefWidth="674.0" BorderPane.alignment="CENTER" />
    </bottom>
-</fx:root>
+</BorderPane>

@@ -1,10 +1,13 @@
 package application.note;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
 
 public class Note {
 	private String content;
@@ -71,7 +74,6 @@ public class Note {
 	{
 		images.remove(image);
 	}
-	
 	
 	public Note()
 	{
