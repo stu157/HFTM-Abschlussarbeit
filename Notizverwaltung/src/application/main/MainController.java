@@ -3,7 +3,6 @@ package application.main;
 import java.util.ResourceBundle;
 
 import application.note.Note;
-import application.note.NoteController;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -16,7 +15,7 @@ import javafx.scene.layout.*;
 
 public class MainController implements Initializable
 { 
-	private SimpleListProperty<NoteController> noteListProperty = new SimpleListProperty(FXCollections.<String>observableArrayList());
+	private SimpleListProperty<String> noteListProperty = new SimpleListProperty(FXCollections.<String>observableArrayList());
 	private SimpleListProperty<String> noteUrlListProperty = new SimpleListProperty(FXCollections.<String>observableArrayList());
 	private SimpleListProperty<String> noteImagesListProperty = new SimpleListProperty(FXCollections.<String>observableArrayList());
 	private StringProperty titleProperty;
@@ -27,7 +26,7 @@ public class MainController implements Initializable
     @FXML
     private Button NewNote;
     @FXML
-    private ListView<NoteController> NotesList;
+    private ListView<String> NotesList;
     
     //Note-Properties
     @FXML
@@ -56,7 +55,7 @@ public class MainController implements Initializable
 
 	@Override
 	public void initialize(java.net.URL arg0, ResourceBundle arg1) {
-		noteListProperty.add(new NoteController());
+		noteListProperty.add("asf");
 		NotesList.setItems(noteListProperty);		
 	}
 }

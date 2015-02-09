@@ -12,12 +12,12 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 
-public class NoteController implements Initializable {    
-	@Override
+public class NoteController {    
+	/*@Override
 	public void initialize(java.net.URL arg0, ResourceBundle arg1) 
 	{
-		/*Title.textProperty().bind(titleProperty);
+		Title.textProperty().bind(titleProperty);
 		titleProperty.set("asf");
-		BorderPane bp = new BorderPane();*/
-	}
+		BorderPane bp = new BorderPane();
+	}*/
 }
