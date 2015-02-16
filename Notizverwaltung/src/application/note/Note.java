@@ -4,23 +4,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 
 public class Note {
-	private String content;
-	private String title;
+	private SimpleStringProperty content = new SimpleStringProperty();
+	private SimpleStringProperty title = new SimpleStringProperty();
 	private List<Hyperlink> urls;
 	private List<Image> images;
 	
-	public String getContent()
+	public SimpleStringProperty getContent()
 	{
 		return content;
 	}
 	
-	public String getTitle()
+	public SimpleStringProperty getTitle()
 	{
 		return title;		
 	}
@@ -37,12 +39,12 @@ public class Note {
 	
 	public void setContent(String newContent)
 	{
-		content = newContent;
+		content.set(newContent);
 	}
 	
 	public void setTitle(String newTitle)
 	{
-		title = newTitle;		
+		title.set(newTitle);		
 	}
 	
 	public void setUrls(List<Hyperlink> newUrlSet)
@@ -79,5 +81,11 @@ public class Note {
 	{
 		urls = new ArrayList<Hyperlink>();
 		images = new ArrayList<Image>();
+	}
+	
+	@Override
+	public String toString()
+	{
+		return title.get();
 	}
 }

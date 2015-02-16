@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="635.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.main.MainController">
+<BorderPane fx:id="ContentPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="635.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.main.MainController">
    <left>
       <AnchorPane minHeight="400.0" minWidth="300.0" prefHeight="400.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
@@ -23,24 +23,4 @@
          </children>
       </AnchorPane>
    </left>
-   <center>
-		<BorderPane prefHeight="424.0" prefWidth="470.0">
-			<center>
-				<AnchorPane prefHeight="317.0" prefWidth="393.0" BorderPane.alignment="CENTER">
-		         	<children>
-		            	<TextArea fx:id="NoteContent" prefHeight="317.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-		         	</children>
-		      	</AnchorPane>
-		   	</center>
-		   	<top>
-		      	<Label fx:id="Title" prefHeight="17.0" prefWidth="400.0" text="Titel" BorderPane.alignment="TOP_LEFT" />
-		   	</top>
-		   	<right>
-		      	<ListView fx:id="NoteImagesList" prefHeight="317.0" prefWidth="120.0" BorderPane.alignment="CENTER" />
-		   	</right>
-		   	<bottom>
-		      	<ListView fx:id="NoteUrlList" prefHeight="90.0" prefWidth="674.0" BorderPane.alignment="CENTER" />
-		   	</bottom>
-		</BorderPane>
- 	</center>
 </BorderPane>
