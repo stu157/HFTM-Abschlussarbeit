@@ -13,7 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 
 public class Note {
-	//bla
 	private SimpleStringProperty content = new SimpleStringProperty();
 	private SimpleStringProperty title = new SimpleStringProperty();
 	private List<Hyperlink> urls;

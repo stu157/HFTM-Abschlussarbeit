@@ -15,7 +15,6 @@ import javafx.scene.layout.BorderPane;
 
 public class NoteController implements Initializable 
 {
-	//Bla
 	private Note selectedNote;
 	
 	public void setSelectedNote(Note newNote)
