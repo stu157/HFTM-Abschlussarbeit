@@ -9,17 +9,17 @@
    <center>
       <AnchorPane prefHeight="317.0" prefWidth="393.0" BorderPane.alignment="CENTER">
          <children>
-            <TextArea fx:id="NoteContent" prefHeight="317.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <TextArea fx:id="noteContent" prefHeight="317.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
    </center>
    <top>
-      <Label fx:id="Title" prefHeight="17.0" prefWidth="400.0" text="Label" BorderPane.alignment="TOP_LEFT" />
+      <Label fx:id="title" prefHeight="17.0" prefWidth="400.0" text="Label" BorderPane.alignment="TOP_LEFT" />
    </top>
    <right>
-      <ListView fx:id="NoteImagesList" prefHeight="317.0" prefWidth="120.0" BorderPane.alignment="CENTER" />
+      <ListView fx:id="noteImagesList" prefHeight="317.0" prefWidth="120.0" BorderPane.alignment="CENTER" />
    </right>
    <bottom>
-      <ListView fx:id="NoteUrlList" prefHeight="90.0" prefWidth="674.0" BorderPane.alignment="CENTER" />
+      <ListView fx:id="noteUrlList" prefHeight="90.0" prefWidth="674.0" BorderPane.alignment="CENTER" />
    </bottom>
 </BorderPane>

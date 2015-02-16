@@ -3,24 +3,18 @@ package application.main;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
-import application.note.Note;
-import application.note.NoteController;
+import application.note.*;
 import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.beans.value.*;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
+import javafx.fxml.*;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
 public class MainController implements Initializable
 { 
+	private AllNotes allNotes = new AllNotes();
 	private SimpleListProperty<Note> noteListProperty = new SimpleListProperty(FXCollections.<String>observableArrayList());	
 	
 	private NoteController noteController;
@@ -75,5 +69,13 @@ public class MainController implements Initializable
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
+		
+		Note no = new Note();
+		no.setTitle("First Node");
+		no.setContent("CONTENT TEXT BLABLABLA");
+		allNotes.addNote(no);
+		allNotes.saveNotes();
+		
+		allNotes.loadNote();
 	}
 }

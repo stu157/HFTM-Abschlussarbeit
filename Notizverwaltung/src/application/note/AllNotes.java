@@ -21,16 +21,16 @@ public class AllNotes implements Serializable {
 	
 	public void removeNote(Note n){
 		// Wird nur geloescht wenn vorhanden ist
-		if(allNotes.contains(n)==true)
+		if(allNotes.contains(n) == true)
 			allNotes.remove(n);
 	}
 	
-	public void saveNote(Note n){
+	public void saveNotes(){
 		
 		try {
-			OutputStream output = new FileOutputStream("notes.dat");
+			OutputStream output = new FileOutputStream("C:\\Users\\stu\\Desktop\\notes.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(output);
-			oos.writeObject(allNotes);
+			oos.writeObject(this);
 			oos.close();
 			output.close();
 		} catch (Exception e) {
@@ -41,7 +41,7 @@ public class AllNotes implements Serializable {
 	public void loadNote(){
 		
 		try {
-			InputStream input = new FileInputStream("notes.dat");
+			InputStream input = new FileInputStream("C:\\Users\\stu\\Desktop\\notes.dat");
 			ObjectInputStream ois = new ObjectInputStream(input);
 			allNotes.addAll((Collection<Note>)ois.readObject());
 			ois.close();

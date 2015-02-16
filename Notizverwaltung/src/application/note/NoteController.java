@@ -1,17 +1,10 @@
 package application.note;
 
-import java.io.IOException;
 import java.util.ResourceBundle;
-
-import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
 
 public class NoteController implements Initializable 
 {
@@ -20,6 +13,9 @@ public class NoteController implements Initializable
 	public void setSelectedNote(Note newNote)
 	{
 		selectedNote = newNote;
+		
+		title.textProperty().bind(selectedNote.getTitle());
+		noteContent.textProperty().bind(selectedNote.getContent());
 	}
 	
 	public Note getSelectedNote()
@@ -28,22 +24,27 @@ public class NoteController implements Initializable
 	}
 	
 	@FXML
-    private ListView<Hyperlink> NoteUrlList;
+    private ListView<Hyperlink> noteUrlList;
     @FXML
-    private TextArea NoteContent;
+    private TextArea noteContent;
     @FXML
-    private Label Title;
+    private Label title;
     @FXML
-    private ListView<Image> NoteImagesList;
+    private ListView<Image> noteImagesList;
+    
+    public String getContent()
+    {
+    	return noteContent.getText();
+    }
+    
+    public String getTitle()
+    {
+    	return title.textProperty().get();
+    }
 	
 	@Override
 	public void initialize(java.net.URL arg0, ResourceBundle arg1) 
 	{
-		if(selectedNote == null)
-			selectedNote = new Note();
 		
-		Title.textProperty().bind(selectedNote.getTitle());
-		
-		BorderPane bp = new BorderPane();
 	}
 }
