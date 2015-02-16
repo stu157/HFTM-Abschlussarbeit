@@ -25,7 +25,7 @@ public class MainController implements Initializable
 	
 	private NoteController noteController;
 	
-	//Selection-View-Properties
+	//Selection-View-Properties 
     @FXML
     private Button DeleteNote;
     @FXML
