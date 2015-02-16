@@ -33,7 +33,7 @@
 		      	</AnchorPane>
 		   	</center>
 		   	<top>
-		      	<Label fx:id="Title" prefHeight="17.0" prefWidth="400.0" text="Titel" BorderPane.alignment="TOP_LEFT" />
+		      	<Label fx:id="NoteTitle" prefHeight="17.0" prefWidth="400.0" text="Titel" BorderPane.alignment="TOP_LEFT" />
 		   	</top>
 		   	<right>
 		      	<ListView fx:id="NoteImagesList" prefHeight="317.0" prefWidth="120.0" BorderPane.alignment="CENTER" />

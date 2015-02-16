@@ -1,5 +1,5 @@
 package application.path;
 
-public class Path {
+public class Image {
 
 }

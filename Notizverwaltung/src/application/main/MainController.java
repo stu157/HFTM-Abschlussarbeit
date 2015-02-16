@@ -27,7 +27,6 @@ public class MainController implements Initializable
     private Button NewNote;
     @FXML
     private ListView<String> NotesList;
-    
     //Note-Properties
     @FXML
     private ListView<Hyperlink> NoteUrlList;
@@ -45,7 +44,7 @@ public class MainController implements Initializable
     
     @FXML
     void NewNoteCommand(ActionEvent event) {
-
+    	titleProperty.set("asflH");
     }
 
     @FXML
@@ -56,6 +55,9 @@ public class MainController implements Initializable
 	@Override
 	public void initialize(java.net.URL arg0, ResourceBundle arg1) {
 		noteListProperty.add("asf");
-		NotesList.setItems(noteListProperty);		
+		NotesList.setItems(noteListProperty);	
+		
+		 titleProperty = NoteTitle.textProperty();
+		 titleProperty.set("asdfasdf");
 	}
 }

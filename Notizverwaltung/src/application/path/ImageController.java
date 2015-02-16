@@ -1,5 +1,5 @@
 package application.path;
 
-public class PathController {
+public class ImageController {
 
 }
