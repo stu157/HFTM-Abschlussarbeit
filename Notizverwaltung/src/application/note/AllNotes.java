@@ -8,29 +8,41 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class AllNotes implements Serializable {
 	
-	List<Note> allNotes = new ArrayList<>();
+	private final String USERPATH = System.getProperty("user.home") + "\\Desktop\\";
+	List<SerializableNote> allAvailableNotes = new ArrayList<>();
 	
-	public void addNote(Note n){
-		allNotes.add(n);
+	public List<SerializableNote> getAllAvailableNotes()
+	{
+		return allAvailableNotes;		
 	}
 	
-	public void removeNote(Note n){
+	public void addNote(SerializableNote n){
+		allAvailableNotes.add(n);
+	}
+	
+	public void addNote(Note n)
+	{
+		allAvailableNotes.add(new SerializableNote(n));		
+	}
+	
+	
+	
+	public void removeNote(SerializableNote n){
 		// Wird nur geloescht wenn vorhanden ist
-		if(allNotes.contains(n) == true)
-			allNotes.remove(n);
+		if(allAvailableNotes.contains(n) == true)
+			allAvailableNotes.remove(n);
 	}
 	
 	public void saveNotes(){
 		
 		try {
-			OutputStream output = new FileOutputStream("C:\\Users\\stu\\Desktop\\notes.dat");
+			OutputStream output = new FileOutputStream(USERPATH + "notes.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(output);
-			oos.writeObject(this);
+			oos.writeObject(allAvailableNotes);
 			oos.close();
 			output.close();
 		} catch (Exception e) {
@@ -38,16 +50,19 @@ public class AllNotes implements Serializable {
 		} 
 	}
 	
-	public void loadNote(){
+	public List<SerializableNote> loadNotes(){
 		
 		try {
-			InputStream input = new FileInputStream("C:\\Users\\stu\\Desktop\\notes.dat");
+			InputStream input = new FileInputStream(USERPATH + "notes.dat");
 			ObjectInputStream ois = new ObjectInputStream(input);
-			allNotes.addAll((Collection<Note>)ois.readObject());
+			Object o = ois.readObject();
+			allAvailableNotes.addAll((List<SerializableNote>)o);
 			ois.close();
 			input.close();
 		} catch (Exception e) {
 			e.getMessage();
 		} 
+		
+		return allAvailableNotes;
 	}
 }

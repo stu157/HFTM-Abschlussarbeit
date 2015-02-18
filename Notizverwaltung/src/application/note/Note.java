@@ -18,6 +18,14 @@ public class Note {
 	private List<Hyperlink> urls;
 	private List<Image> images;
 	
+	public Note(SerializableNote sn)
+	{
+		content.set(sn.getContent());
+		title.set(sn.getTitle());
+		urls = sn.getUrls();
+		images = sn.getImages();
+	}
+	
 	public SimpleStringProperty getContent()
 	{
 		return content;

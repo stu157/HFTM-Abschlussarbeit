@@ -40,14 +40,13 @@ public class MainController implements Initializable
     }
 
 	@Override
-	public void initialize(java.net.URL arg0, ResourceBundle arg1) {
-		Note n = new Note();
-		n.setTitle("sdlgjh");
-		noteListProperty.add(n);
-		n = new Note();
-		n.setTitle("sdfhsdfh");
-		noteListProperty.add(n);
-		NotesList.setItems(noteListProperty);
+	public void initialize(java.net.URL arg0, ResourceBundle arg1) 
+	{		
+		for(SerializableNote sn : allNotes.loadNotes())
+		{
+			noteListProperty.add(new Note(sn));
+		}
+		NotesList.setItems(noteListProperty);	
 		
 		NotesList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Note>() {
 		    @Override
@@ -68,14 +67,6 @@ public class MainController implements Initializable
 		catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
-		
-		Note no = new Note();
-		no.setTitle("First Node");
-		no.setContent("CONTENT TEXT BLABLABLA");
-		allNotes.addNote(no);
-		allNotes.saveNotes();
-		
-		allNotes.loadNote();
+		}
 	}
 }
