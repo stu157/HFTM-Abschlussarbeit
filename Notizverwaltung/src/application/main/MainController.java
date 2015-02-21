@@ -31,12 +31,17 @@ public class MainController implements Initializable
     
     @FXML
     void NewNoteCommand(ActionEvent event) {
-    	noteController.getSelectedNote().setTitle("dsglsndg");
+    	Note note = new Note();
+    	note.setTitle("Neue Notiz");
+    	note.setContent("");
+    	// Note in Note-Collection einfügen
+    	noteListProperty.add(note);
+    	allNotes.addNote(note);
     }
 
     @FXML
     void DeleteNoteCommand(ActionEvent event) {
-
+    	
     }
 
 	@Override

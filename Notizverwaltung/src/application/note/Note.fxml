@@ -14,7 +14,7 @@
       </AnchorPane>
    </center>
    <top>
-      <Label fx:id="title" prefHeight="17.0" prefWidth="400.0" text="Label" BorderPane.alignment="TOP_LEFT" />
+      <Label fx:id="title" prefHeight="17.0" prefWidth="400.0" text="Notiz" BorderPane.alignment="TOP_LEFT" />
    </top>
    <right>
       <ListView fx:id="noteImagesList" prefHeight="317.0" prefWidth="120.0" BorderPane.alignment="CENTER" />

@@ -11,7 +11,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("Main.fxml"));
-			Scene scene = new Scene(root,300,400);
+			Scene scene = new Scene(root,700,400);
 			
 			primaryStage.minHeightProperty().set(425);
 			primaryStage.minWidthProperty().set(320);
