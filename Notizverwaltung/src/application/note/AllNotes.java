@@ -50,6 +50,11 @@ public class AllNotes implements Serializable {
 		} 
 	}
 	
+	public void saveNote(Note n)
+	{
+		
+	}
+	
 	public List<SerializableNote> loadNotes(){
 		
 		try {

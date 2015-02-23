@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -17,6 +18,14 @@ public class Note {
 	private SimpleStringProperty title = new SimpleStringProperty();
 	private List<Hyperlink> urls;
 	private List<Image> images;
+	private UUID id;
+	
+	public Note()
+	{
+		urls = new ArrayList<Hyperlink>();
+		images = new ArrayList<Image>();
+		id = UUID.randomUUID();
+	}
 	
 	public Note(SerializableNote sn)
 	{
@@ -24,6 +33,7 @@ public class Note {
 		title.set(sn.getTitle());
 		urls = sn.getUrls();
 		images = sn.getImages();
+		id = sn.getId();
 	}
 	
 	public SimpleStringProperty getContent()
@@ -44,6 +54,11 @@ public class Note {
 	public List<Image> getImages()
 	{
 		return images;		
+	}
+	
+	public UUID getId()
+	{
+		return id;
 	}
 	
 	public void setContent(String newContent)
@@ -84,12 +99,6 @@ public class Note {
 	public void removeImage(Image image)
 	{
 		images.remove(image);
-	}
-	
-	public Note()
-	{
-		urls = new ArrayList<Hyperlink>();
-		images = new ArrayList<Image>();
 	}
 	
 	@Override

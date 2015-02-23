@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import application.note.*;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.*;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -57,6 +58,15 @@ public class MainController implements Initializable
 		    @Override
 		    public void changed(ObservableValue<? extends Note> observable, Note oldValue, Note newValue) {
 		    	noteController.setSelectedNote(NotesList.getSelectionModel().getSelectedItem());
+		    	
+		    	noteController.getSelectedNote().getContent().addListener(new ChangeListener<String>()
+    			{
+    				@Override
+    				public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
+    				{
+    					allNotes.saveNotes();
+    				}
+    			});
 		    }
 		});
 		

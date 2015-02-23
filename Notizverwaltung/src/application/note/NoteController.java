@@ -6,10 +6,12 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 
 public class NoteController implements Initializable 
@@ -37,11 +39,15 @@ public class NoteController implements Initializable
 	}
 	
 	@FXML
+	private Button newImage;
+	@FXML
+	private Button newUrl;
+	@FXML
     private ListView<Hyperlink> noteUrlList;
     @FXML
     private TextArea noteContent;
     @FXML
-    private Label title;
+    private TextField title;
     @FXML
     private ListView<Image> noteImagesList;
     

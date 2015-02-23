@@ -2,6 +2,7 @@ package application.note;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 import javafx.scene.control.Hyperlink;
 import javafx.scene.image.Image;
@@ -11,6 +12,7 @@ public class SerializableNote implements Serializable{
 	private String title;
 	private List<Hyperlink> urls;
 	private List<Image> images;
+	private UUID id;
 	
 	public SerializableNote(Note n)
 	{
@@ -18,6 +20,7 @@ public class SerializableNote implements Serializable{
 		title = n.getTitle().get();
 		urls = n.getUrls();
 		images = n.getImages();
+		id = n.getId();
 	}
 	
 	public List<Image> getImages() {
@@ -52,5 +55,8 @@ public class SerializableNote implements Serializable{
 		this.content = content;
 	}
 	
-	
+	public UUID getId()
+	{
+		return this.id;
+	}	
 }
