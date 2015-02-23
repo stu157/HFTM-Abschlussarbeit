@@ -28,12 +28,12 @@
             <ListView fx:id="noteUrlList" prefHeight="88.0" prefWidth="385.0" />
                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                   <children>
-                     <Button fx:id="newImage" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Neues Bild">
+                     <Button fx:id="newImage" mnemonicParsing="false" onAction="#newImageCommand" prefHeight="25.0" prefWidth="100.0" text="Neues Bild">
                         <VBox.margin>
                            <Insets bottom="10.0" />
                         </VBox.margin>
                      </Button>
-                     <Button fx:id="newUrl" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Neue Url" />
+                     <Button fx:id="newUrl" mnemonicParsing="false" onAction="#newUrlCommand" prefHeight="25.0" prefWidth="100.0" text="Neue Url" />
                   </children>
               </VBox>
          </children>
