@@ -13,9 +13,9 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 
-public class Note {
-	private SimpleStringProperty content = new SimpleStringProperty();
-	private SimpleStringProperty title = new SimpleStringProperty();
+public class Note implements Serializable{
+	private String content;
+	private String title;
 	private List<Hyperlink> urls;
 	private List<Image> images;
 	private UUID id;
@@ -27,21 +27,21 @@ public class Note {
 		id = UUID.randomUUID();
 	}
 	
-	public Note(SerializableNote sn)
+	public Note(Note n)
 	{
-		content.set(sn.getContent());
-		title.set(sn.getTitle());
-		urls = sn.getUrls();
-		images = sn.getImages();
-		id = sn.getId();
+		content = n.getContent();
+		title = n.getTitle();
+		urls = n.getUrls();
+		images = n.getImages();
+		id = n.getId();
 	}
 	
-	public SimpleStringProperty getContent()
+	public String getContent()
 	{
 		return content;
 	}
 	
-	public SimpleStringProperty getTitle()
+	public String getTitle()
 	{
 		return title;		
 	}
@@ -63,12 +63,12 @@ public class Note {
 	
 	public void setContent(String newContent)
 	{
-		content.set(newContent);
+		content = newContent;
 	}
 	
 	public void setTitle(String newTitle)
 	{
-		title.set(newTitle);		
+		title = newTitle;		
 	}
 	
 	public void setUrls(List<Hyperlink> newUrlSet)
@@ -104,6 +104,6 @@ public class Note {
 	@Override
 	public String toString()
 	{
-		return title.get();
+		return title + " - " + content;
 	}
 }

@@ -1,7 +1,9 @@
 package application.main;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.ResourceBundle;
+import application.interfaces.*;
 
 import application.note.*;
 import javafx.beans.property.SimpleListProperty;
@@ -13,11 +15,11 @@ import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
-public class MainController implements Initializable
+
+public class MainController implements Initializable, CallBack
 { 
 	private AllNotes allNotes = new AllNotes();
 	private SimpleListProperty<Note> noteListProperty = new SimpleListProperty(FXCollections.<String>observableArrayList());	
-	
 	private NoteController noteController;
 	
 	//Selection-View-Properties 
@@ -42,40 +44,30 @@ public class MainController implements Initializable
 
     @FXML
     void DeleteNoteCommand(ActionEvent event) {
-    	
+    	allNotes.removeNote(noteController.getSelectedNote());
     }
 
 	@Override
 	public void initialize(java.net.URL arg0, ResourceBundle arg1) 
 	{		
-		for(SerializableNote sn : allNotes.loadNotes())
+		for(Note n : allNotes.loadNotes())
 		{
-			noteListProperty.add(new Note(sn));
+			noteListProperty.add(new Note(n));
 		}
-		NotesList.setItems(noteListProperty);	
+		NotesList.itemsProperty().bind(noteListProperty);
+		//NotesList.setItems(noteListProperty);
 		
-		NotesList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Note>() {
-		    @Override
-		    public void changed(ObservableValue<? extends Note> observable, Note oldValue, Note newValue) {
-		    	noteController.setSelectedNote(NotesList.getSelectionModel().getSelectedItem());
-		    	
-		    	noteController.getSelectedNote().getContent().addListener(new ChangeListener<String>()
-    			{
-    				@Override
-    				public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
-    				{
-    					allNotes.saveNotes();
-    				}
-    			});
-		    }
-		});
+		
+		setSelectedItemChangeListener();
 		
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader();
 			
 			BorderPane bp;
 			bp = fxmlLoader.load(getClass().getResource("/application/note/Note.fxml").openStream()); 
+			
 			noteController = fxmlLoader.getController();
+			noteController.setParentController(this);
 			
 			ContentPane.centerProperty().set(bp);
 		}
@@ -83,5 +75,23 @@ public class MainController implements Initializable
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	private void setSelectedItemChangeListener()
+	{
+		NotesList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Note>() 
+		{
+		    @Override
+		    public void changed(ObservableValue<? extends Note> observable, Note oldValue, Note newValue) {
+		    	Note selectedNote = NotesList.getSelectionModel().getSelectedItem();
+		    	noteController.setSelectedNote(selectedNote);
+		    }
+		});
+	}
+
+	@Override
+	public void methodToCallBack() 
+	{
+		allNotes.saveNote(noteController.getSelectedNote());
 	}
 }
