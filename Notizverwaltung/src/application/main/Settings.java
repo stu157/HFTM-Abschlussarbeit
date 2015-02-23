@@ -11,8 +11,6 @@ import java.util.List;
 
 import javax.swing.text.Position;
 
-import application.note.SerializableNote;
-
 public class Settings implements Serializable {
 
 	private final String USERPATH = System.getProperty("user.home")
