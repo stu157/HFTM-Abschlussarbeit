@@ -2,11 +2,6 @@ package application.note;
 
 import java.util.ResourceBundle;
 
-import application.interfaces.CallBack;
-import application.main.MainController;
-
-import com.sun.glass.ui.Pixels.Format;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -23,47 +18,26 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class NoteController implements Initializable
-{
-	private MainController parentController;
+public class NoteController implements Initializable {
 	private Note selectedNote;
 
-	public void setParentController(MainController mc)
-	{
-		if(parentController == null)
-			parentController = mc;
-	}
 	public void setSelectedNote(Note newNote) {
 		selectedNote = newNote;
-		noteContent.setText(selectedNote.getContent());
-		title.setText(selectedNote.getTitle());
+
+		title.textProperty().bind(selectedNote.getTitle());
+
+		// Mit dieser Zeile kann der Content nicht mehr bearbeitet werden
+		// noteContent.textProperty().bind(selectedNote.getContent());
+
+		// Obere durch diese Zeile ersetzt
+		noteContent.setText(selectedNote.getContent().getValue());
+
 	}
 
 	public Note getSelectedNote() {
 		return selectedNote;
 	}
 
-	//ChangeListener für TextArea noteContent
-	private void setContentChangeListener()
-	{
-		noteContent.textProperty().addListener(new ChangeListener<String>()
-		{
-			@Override
-			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
-			{
-				selectedNote.setContent(noteContent.getText());
-				//parentController.saveChanges();
-				
-		        CallBack callBack = parentController;
-		        register(callBack);
-			}
-		});
-	}
-	
-	public void register(CallBack callback) {
-        callback.methodToCallBack();
-    }
-	
 	@FXML
 	private Button newImage;
 	@FXML
@@ -124,6 +98,14 @@ public class NoteController implements Initializable
 
 	@Override
 	public void initialize(java.net.URL arg0, ResourceBundle arg1) {
-		setContentChangeListener();
+		// ChangeListener für TextArea noteContent
+		// Schreibt den geänderten Text in die Aktulle Note
+		noteContent.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable,
+					String oldValue, String newValue) {
+				selectedNote.setContent(noteContent.getText());
+			}
+		});
 	}
 }
