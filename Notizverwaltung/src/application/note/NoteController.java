@@ -69,8 +69,7 @@ public class NoteController implements Initializable {
 			stage.setTitle("Neues Bild hinzufügen");
 			// Setzt das ProgrammIcon
 			stage.getIcons().add(
-					new Image("file:///" + System.getProperty("user.home")
-							+ "\\Desktop\\" + "Icon.png"));
+					new Image("application/images/Icon.png"));
 
 			stage.setResizable(false);
 			stage.show();
@@ -89,8 +88,7 @@ public class NoteController implements Initializable {
 			stage.setTitle("Neuer URL hinzufügen");
 			// Setzt das ProgrammIcon
 			stage.getIcons().add(
-					new Image("file:///" + System.getProperty("user.home")
-							+ "\\Desktop\\" + "Icon.png"));
+					new Image("application/images/Icon.png"));
 			stage.setResizable(false);
 			stage.show();
 		} catch (Exception e) {

@@ -3,7 +3,7 @@ package application.main;
 import java.io.File;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileLock;
-
+import application.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -35,8 +35,7 @@ public class Main extends Application {
 			
 			// Setzt das ProgrammIcon
 			primaryStage.getIcons().add(
-					new Image("file:///" + System.getProperty("user.home")
-							+ "\\Desktop\\" + "Icon.png"));
+					new Image("application/images/Icon.png"));
 
 			// scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
@@ -67,7 +66,6 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
-
 	}
 
 	private void checkSingleInstance() {
