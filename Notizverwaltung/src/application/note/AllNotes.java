@@ -10,9 +10,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllNotes implements Serializable {
-	
-	private final String USERPATH = System.getProperty("user.home") + "\\Desktop\\";
+public class AllNotes implements Serializable 
+{	
+	private final String USERPATH = System.getProperty("user.home")+"\\AppData\\Local\\Notizverwaltung\\";
 	List<Note> allAvailableNotes = new ArrayList<>();
 	
 	public List<Note> getAllAvailableNotes()

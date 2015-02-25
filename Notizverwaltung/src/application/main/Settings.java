@@ -1,5 +1,6 @@
 package application.main;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -7,14 +8,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 import javax.swing.text.Position;
 
-public class Settings implements Serializable {
-
-	private final String USERPATH = System.getProperty("user.home")
-			+ "\\Desktop\\";
+public class Settings implements Serializable 
+{
+	private final String USERPATH = System.getProperty("user.home")+"\\AppData\\Local\\Notizverwaltung\\";
 	private Double height = 0.0;
 	private Double width = 0.0;
 	private Double positionX = 0.0;
@@ -52,10 +54,21 @@ public class Settings implements Serializable {
 		this.positionY = positinbY;
 	}
 
+	public void createProjectFolder(String folder)
+	{
+		File file = new File(folder);
+
+		if(!file.exists())
+		{
+			file.mkdir();
+		}		
+	}
+	
 	public void saveSettings() {
 
-		try {
-			OutputStream output = new FileOutputStream(USERPATH + "notes.dat");
+		try 
+		{
+			OutputStream output = new FileOutputStream(USERPATH + "settings.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(output);
 			oos.writeObject(height);
 			oos.writeObject(width);
@@ -63,14 +76,20 @@ public class Settings implements Serializable {
 			oos.writeObject(positionY);
 			oos.close();
 			output.close();
-		} catch (Exception e) {
+		} 
+		catch (Exception e) 
+		{
 			e.getMessage();
 		}
 	}
 
-	public void loadSettings() {
-		try {
-			InputStream input = new FileInputStream(USERPATH + "notes.dat");
+	public void loadSettings() 
+	{
+		createProjectFolder(USERPATH);
+		
+		try 
+		{
+			InputStream input = new FileInputStream(USERPATH + "settings.dat");
 			ObjectInputStream ois = new ObjectInputStream(input);
 			height = (Double) ois.readObject();
 			width = (Double) ois.readObject();
@@ -78,7 +97,9 @@ public class Settings implements Serializable {
 			positionY = (Double) ois.readObject();
 			ois.close();
 			input.close();
-		} catch (Exception e) {
+		} 
+		catch (Exception e) 
+		{
 			e.getMessage();
 		}
 	}

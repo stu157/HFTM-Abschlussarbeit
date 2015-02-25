@@ -3,8 +3,8 @@ package application.main;
 import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
-import application.interfaces.*;
 
+import application.interfaces.*;
 import application.note.*;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -16,7 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
 
-public class MainController implements Initializable, CallBack
+public class MainController implements Initializable, SaveNoteCallBack
 { 
 	private AllNotes allNotes = new AllNotes();
 	private SimpleListProperty<Note> noteListProperty = new SimpleListProperty(FXCollections.<String>observableArrayList());	
@@ -90,7 +90,7 @@ public class MainController implements Initializable, CallBack
 	}
 
 	@Override
-	public void methodToCallBack() 
+	public void saveNoteCallback() 
 	{
 		allNotes.saveNote(noteController.getSelectedNote());
 	}
