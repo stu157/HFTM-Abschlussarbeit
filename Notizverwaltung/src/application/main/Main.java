@@ -3,7 +3,7 @@ package application.main;
 import java.io.File;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileLock;
-import application.*;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -19,6 +19,15 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		checkSingleInstance();
 
+		/*	Überprüfen ob der Ordner bereits existiert.
+		 *  Wenn nicht wird der Ornder erstllt.
+		 */
+		File file = new File(System.getProperty("user.home")+"\\AppData\\Local\\Notizverwaltung");
+		if(!file.exists())
+		{
+			file.mkdir();
+		}
+
 		Settings setting = new Settings();
 		setting.loadSettings();
 
@@ -28,7 +37,7 @@ public class Main extends Application {
 			Scene scene = new Scene(root, 700, 400);
 
 			primaryStage.minHeightProperty().set(425);
-			primaryStage.minWidthProperty().set(320);
+			primaryStage.minWidthProperty().set(800);
 
 			// Setzt Titel
 			primaryStage.setTitle("Notizverwaltung");

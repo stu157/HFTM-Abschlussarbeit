@@ -6,19 +6,21 @@
 
 <BorderPane fx:id="ContentPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="635.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.main.MainController">
    <left>
-      <AnchorPane minHeight="400.0" minWidth="300.0" prefHeight="400.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+      <AnchorPane minHeight="303.0" minWidth="300.0" prefHeight="400.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
-            <ScrollPane minHeight="335.0" minWidth="300.0" prefHeight="335.0" prefWidth="300.0" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ScrollPane minHeight="272.0" minWidth="300.0" prefHeight="316.0" prefWidth="300.0" AnchorPane.bottomAnchor="84.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <content>
-                <AnchorPane minHeight="335.0" minWidth="300.0" prefHeight="335.0" prefWidth="300.0">
+                <AnchorPane minHeight="303.0" minWidth="297.0" prefHeight="316.0" prefWidth="303.0">
                      <children>
-                        <ListView fx:id="NotesList" layoutX="25.0" layoutY="22.0" minHeight="335.0" minWidth="300.0" prefHeight="335.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <ListView fx:id="NotesList" layoutX="25.0" layoutY="22.0" minHeight="306.0" minWidth="289.0" prefHeight="315.0" prefWidth="299.0" AnchorPane.bottomAnchor="-12.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
               </content>
             </ScrollPane>
-            <Button fx:id="NewNote" layoutX="14.0" layoutY="351.0" minHeight="25.0" minWidth="100.0" mnemonicParsing="false" onAction="#NewNoteCommand" prefHeight="25.0" prefWidth="100.0" text="Neue Notiz" AnchorPane.leftAnchor="14.0" />
-            <Button fx:id="DeleteNote" layoutX="186.0" layoutY="351.0" minHeight="25.0" minWidth="100.0" mnemonicParsing="false" onAction="#DeleteNoteCommand" prefHeight="25.0" prefWidth="100.0" text="Lösche Notiz" AnchorPane.rightAnchor="14.0" />
+            <Button fx:id="NewNote" layoutX="14.0" layoutY="364.0" minHeight="25.0" minWidth="100.0" mnemonicParsing="false" onAction="#NewNoteCommand" prefHeight="25.0" prefWidth="100.0" text="Neue Notiz" AnchorPane.leftAnchor="14.0" />
+            <Button fx:id="DeleteNote" layoutX="186.0" layoutY="364.0" minHeight="25.0" minWidth="100.0" mnemonicParsing="false" onAction="#DeleteNoteCommand" prefHeight="25.0" prefWidth="100.0" text="Lösche Notiz" AnchorPane.rightAnchor="14.0" />
+            <CheckBox fx:id="FilterOn" layoutX="203.0" layoutY="332.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="96.0" text="Filter Ein/Aus" />
+            <TextField fx:id="FilterText" layoutX="14.0" layoutY="327.0" prefHeight="25.0" prefWidth="170.0" />
          </children>
       </AnchorPane>
    </left>

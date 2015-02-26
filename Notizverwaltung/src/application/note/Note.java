@@ -104,6 +104,9 @@ public class Note implements Serializable{
 	@Override
 	public String toString()
 	{
+		if(content.toString().length()>20){
+			return title + " - " + content.toString().replaceAll("\n", " ").substring(0, 20);
+		}
 		return title + " - " + content;
 	}
 }
