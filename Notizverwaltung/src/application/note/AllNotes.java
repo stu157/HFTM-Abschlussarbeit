@@ -24,8 +24,13 @@ public class AllNotes implements Serializable {
 		saveNotes();
 	}
 
-	public void removeNote(Note n) {
-		allAvailableNotes.remove(n);
+	public void removeNote(Note noteToRemove) {
+		for(Note note : allAvailableNotes)
+		{
+			if(note.getId().equals(noteToRemove.getId()))
+				noteToRemove = note;
+		}
+		allAvailableNotes.remove(noteToRemove);
 		saveNotes();
 	}
 

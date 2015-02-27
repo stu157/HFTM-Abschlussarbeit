@@ -34,18 +34,21 @@ public class MainController implements Initializable, SaveNoteCallBack {
 	private SimpleBooleanProperty filterBooleanProperty = new SimpleBooleanProperty();
 
 	// Selection-View-Properties
+	@FXML private Button DeleteNote;
+	@FXML private Button NewNote;
+	@FXML private ListView<Note> NotesList;
+	@FXML private BorderPane ContentPane;
+	@FXML private CheckBox Filter;
+	@FXML private TextField FilterText;
+	
 	@FXML
-	private Button DeleteNote;
-	@FXML
-	private Button NewNote;
-	@FXML
-	private ListView<Note> NotesList;
-	@FXML
-	private BorderPane ContentPane;
-	@FXML
-	private CheckBox FilterOn;
-	@FXML
-	private TextField FilterText;
+	void FilterSwitched(ActionEvent event)
+	{
+		if(Filter.isSelected())
+		{
+			return;
+		}
+	}
 
 	@FXML
 	void NewNoteCommand(ActionEvent event) {
@@ -62,83 +65,83 @@ public class MainController implements Initializable, SaveNoteCallBack {
 		allNotes.removeNote(noteController.getSelectedNote());
 		noteListProperty.remove(noteController.getSelectedNote());
 	}
-
+	
 	@Override
-	public void initialize(java.net.URL arg0, ResourceBundle arg1) {
-
-		/*
-		 * Filter
-		 */
-		FilteredList<Note> filteredData = new FilteredList<>(noteListProperty,
-				auswahl -> true);
-
+	public void initialize(java.net.URL arg0, ResourceBundle arg1) 
+	{
 		// FilterCheckbox Listener
-		FilterOn.selectedProperty().addListener(new ChangeListener<Boolean>() {
+		Filter.selectedProperty().addListener(new ChangeListener<Boolean>() {
 			public void changed(ObservableValue ov, Boolean oldValue,
 					Boolean newValue) {
 				filterBooleanProperty.setValue(newValue);
 			}
 		});
 
-		// 2. Set the filter Predicate whenever the filter changes.
-		FilterText.textProperty().addListener(
-				(observable, oldValue, newValue) -> {
-					filteredData.setPredicate(auswahl -> {
-
-						// zeigt alles an
-							if (newValue == null
-									|| newValue.isEmpty()
-									|| filterBooleanProperty.getValue()
-											.booleanValue()) {
-								return true;
-							}
-							// compare with filter text
-							String lowerCaseFilter = newValue.toLowerCase();
-
-							if (auswahl.getTitle().toLowerCase()
-									.indexOf(lowerCaseFilter) != -1) {
-								return true; // Filter matches
-							} else
-								return false; // Does not match
-						});
-				});
-
-		SimpleListProperty<Note> sortedData = new SimpleListProperty<>(
-				filteredData);
-		NotesList.itemsProperty().bind(sortedData);
 
 		for (Note n : allNotes.loadNotes()) {
 			noteListProperty.add(new Note(n));
 		}
 
+		setFilterListener();
 		setSelectedItemChangeListener();
+		loadNoteView();
+	}
 
+	private void loadNoteView()
+	{
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader();
 
 			BorderPane bp;
-			bp = fxmlLoader.load(getClass().getResource(
-					"/application/note/Note.fxml").openStream());
+			bp = fxmlLoader.load(getClass().getResource("/application/note/Note.fxml").openStream());
 
 			noteController = fxmlLoader.getController();
 			noteController.setParentController(this);
 
 			ContentPane.centerProperty().set(bp);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (IOException e) {
 			e.printStackTrace();
-		}
+		}		
 	}
+	
+	private void setFilterListener()
+	{
+		FilteredList<Note> filteredData = new FilteredList<>(noteListProperty, auswahl -> true);
+		
+		// 2. Set the filter Predicate whenever the filter changes.
+		FilterText.textProperty().addListener((observable, oldValue, newValue) -> 
+		{
+			filteredData.setPredicate(auswahl -> 
+			{
 
+			// zeigt alles an
+				if (newValue == null || newValue.isEmpty() || filterBooleanProperty.getValue().booleanValue()) 
+					return true;
+				// compare with filter text
+				String lowerCaseFilter = newValue.toLowerCase();
+
+				if (auswahl.getTitle().toLowerCase().indexOf(lowerCaseFilter) != -1)
+					return true; // Filter matches
+				else
+					return false; // Does not match
+			});
+		});	
+
+		SimpleListProperty<Note> sortedData = new SimpleListProperty<>(filteredData);
+		NotesList.itemsProperty().bind(sortedData);
+	}
+	
+	
 	private void setSelectedItemChangeListener() {
 		NotesList.getSelectionModel().selectedItemProperty()
 				.addListener(new ChangeListener<Note>() {
 					@Override
 					public void changed(
 							ObservableValue<? extends Note> observable,
-							Note oldValue, Note newValue) {
-						Note selectedNote = NotesList.getSelectionModel()
-								.getSelectedItem();
+							Note oldValue, Note newValue) 
+					{
+						Note selectedNote = NotesList.getSelectionModel().getSelectedItem();
 
 						// Damit nach dem sortieren keine nullPointerException
 						// entsteht
