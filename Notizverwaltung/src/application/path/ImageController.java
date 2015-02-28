@@ -1,14 +1,17 @@
 package application.path;
 
-import application.interfaces.DialogCallBack;
-import application.interfaces.SaveNoteCallBack;
-import application.note.NoteController;
+import java.io.File;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import application.interfaces.DialogCallBack;
+import application.note.NoteController;
 
 public class ImageController 
 {
@@ -20,6 +23,12 @@ public class ImageController
 
     @FXML
     private Button AbbrechenButton;
+    
+    @FXML
+    private Button FileChooserButton;
+
+    @FXML
+    private TextField ImagePath;
 
     @FXML
     void OkCommand(ActionEvent event) 
@@ -33,6 +42,19 @@ public class ImageController
     void AbbrechenCommand(ActionEvent event) {
     	Stage stage = (Stage) AbbrechenButton.getScene().getWindow();
 		stage.close();
+    }
+    
+    @FXML
+    void FileChooserCommand(ActionEvent event) {
+    	fc.setTitle("Open File");
+    	fc.getExtensionFilters().add(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+        File file = fc.showOpenDialog(new Stage());
+       
+        // Exception verhindern wenn kein file geladen wurde.. 
+        if(file!=null)
+        {
+        	 ImagePath.setText(file.getPath());
+        } 
     }
 
 	public void initData(NoteController controller) 
