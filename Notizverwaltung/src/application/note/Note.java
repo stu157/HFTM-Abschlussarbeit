@@ -1,21 +1,18 @@
 package application.note;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
 
 public class Note implements Serializable{
 	private String content;
 	private String title;
+	private Date date;
 	private List<Hyperlink> urls;
 	private List<Image> images;
 	private UUID id;
@@ -101,12 +98,20 @@ public class Note implements Serializable{
 		images.remove(image);
 	}
 	
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
 	@Override
 	public String toString()
 	{
 		if(content.toString().length()>20){
 			return title + " - " + content.toString().replaceAll("\n", " ").substring(0, 20);
 		}
-		return title + " - " + content;
+		return title + " - " + content.replaceAll("\n", " ");
 	}
 }

@@ -1,10 +1,9 @@
 package application.main;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.ResourceBundle;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.value.ChangeListener;
@@ -61,9 +60,12 @@ public class MainController implements Initializable, SaveNoteCallBack {
 		Note note = new Note();
 		note.setTitle("Neue Notiz");
 		note.setContent("");
+		// Datum hinzufügen
+		note.setDate(new Date());
 		// Note in Note-Collection einfügen
 		noteListProperty.add(note);
 		allNotes.addNote(note);
+		
 	}
 
 	@FXML
