@@ -46,8 +46,14 @@ public class MainController implements Initializable, SaveNoteCallBack {
 	{
 		if(Filter.isSelected())
 		{
-			return;
+			FilterText.textProperty().set(FilterText.textProperty().get() + "ProvokeEvent");
+			FilterText.textProperty().set(FilterText.textProperty().get().replace("ProvokeEvent", ""));
 		}
+		else
+		{
+			FilterText.textProperty().set("");
+			NotesList.itemsProperty().bind(noteListProperty);
+		}	
 	}
 
 	@FXML
@@ -69,15 +75,6 @@ public class MainController implements Initializable, SaveNoteCallBack {
 	@Override
 	public void initialize(java.net.URL arg0, ResourceBundle arg1) 
 	{
-		// FilterCheckbox Listener
-		Filter.selectedProperty().addListener(new ChangeListener<Boolean>() {
-			public void changed(ObservableValue ov, Boolean oldValue,
-					Boolean newValue) {
-				filterBooleanProperty.setValue(newValue);
-			}
-		});
-
-
 		for (Note n : allNotes.loadNotes()) {
 			noteListProperty.add(new Note(n));
 		}
@@ -85,6 +82,7 @@ public class MainController implements Initializable, SaveNoteCallBack {
 		setFilterListener();
 		setSelectedItemChangeListener();
 		loadNoteView();
+		NotesList.itemsProperty().bind(noteListProperty);
 	}
 
 	private void loadNoteView()
@@ -112,47 +110,50 @@ public class MainController implements Initializable, SaveNoteCallBack {
 		// 2. Set the filter Predicate whenever the filter changes.
 		FilterText.textProperty().addListener((observable, oldValue, newValue) -> 
 		{
-			filteredData.setPredicate(auswahl -> 
+			if(Filter.isSelected())
 			{
+				filteredData.setPredicate(auswahl -> 
+				{
+	
+				// zeigt alles an
+					if (newValue == null || newValue.isEmpty() || filterBooleanProperty.getValue().booleanValue()) 
+						return true;
+					// compare with filter text
+					String lowerCaseFilter = newValue.toLowerCase();
+	
+					if (auswahl.getTitle().toLowerCase().indexOf(lowerCaseFilter) != -1)
+						return true; // Filter matches
+					else
+						return false; // Does not match
+				});
 
-			// zeigt alles an
-				if (newValue == null || newValue.isEmpty() || filterBooleanProperty.getValue().booleanValue()) 
-					return true;
-				// compare with filter text
-				String lowerCaseFilter = newValue.toLowerCase();
-
-				if (auswahl.getTitle().toLowerCase().indexOf(lowerCaseFilter) != -1)
-					return true; // Filter matches
-				else
-					return false; // Does not match
-			});
+				SimpleListProperty<Note> sortedData = new SimpleListProperty<>(filteredData);
+				NotesList.itemsProperty().bind(sortedData);
+			}
+			else
+				NotesList.itemsProperty().bind(noteListProperty);
 		});	
-
-		SimpleListProperty<Note> sortedData = new SimpleListProperty<>(filteredData);
-		NotesList.itemsProperty().bind(sortedData);
 	}
 	
 	
 	private void setSelectedItemChangeListener() {
-		NotesList.getSelectionModel().selectedItemProperty()
-				.addListener(new ChangeListener<Note>() {
-					@Override
-					public void changed(
-							ObservableValue<? extends Note> observable,
-							Note oldValue, Note newValue) 
-					{
-						Note selectedNote = NotesList.getSelectionModel().getSelectedItem();
-
-						// Damit nach dem sortieren keine nullPointerException
-						// entsteht
-						// Wenn selectedNote==null, dann wird die selection auf
-						// die "nullte" note gesetzt.
-						if (selectedNote == null) {
-							noteController.setSelectedNote(new Note());
-						} else
-							noteController.setSelectedNote(selectedNote);
-					}
-				});
+		NotesList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Note>() 
+		{
+			@Override
+			public void changed(ObservableValue<? extends Note> observable, Note oldValue, Note newValue) 
+			{
+				Note selectedNote = NotesList.getSelectionModel().getSelectedItem();
+	
+				// Damit nach dem sortieren keine nullPointerException
+				// entsteht
+				// Wenn selectedNote==null, dann wird die selection auf
+				// die "nullte" note gesetzt.
+				if (selectedNote == null) 
+					noteController.setSelectedNote(new Note());
+				else
+					noteController.setSelectedNote(selectedNote);
+			}
+		});
 	}
 
 	@Override

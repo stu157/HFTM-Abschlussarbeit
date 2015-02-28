@@ -34,10 +34,10 @@ public class Main extends Application {
 		try {
 			BorderPane root = (BorderPane) FXMLLoader.load(getClass()
 					.getResource("Main.fxml"));
-			Scene scene = new Scene(root, 700, 400);
+			Scene scene = new Scene(root, 600, 700);
 
-			primaryStage.minHeightProperty().set(425);
-			primaryStage.minWidthProperty().set(800);
+			primaryStage.minHeightProperty().set(600);
+			primaryStage.minWidthProperty().set(700);
 
 			// Setzt Titel
 			primaryStage.setTitle("Notizverwaltung");
