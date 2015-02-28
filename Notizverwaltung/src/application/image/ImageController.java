@@ -1,6 +1,7 @@
-package application.path;
+package application.image;
 
 import java.io.File;
+import java.net.URI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -65,7 +66,7 @@ public class ImageController
 	
 	//Schickt über das Callback-Objekt vom Interface-Typ DialogCallBack die eingegebene URL an die zugewiesene Methode.
     public void sendCallBack() {
-    	Image i = new Image("Random-URL");
-        callBack.dialogCallBackMessage(i);
+    	ImageModel il = new ImageModel("File:" + ImagePath.textProperty().get());
+        callBack.dialogCallBackMessage(il);
     }
 }

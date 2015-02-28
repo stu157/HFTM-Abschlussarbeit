@@ -6,21 +6,23 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import application.image.ImageModel;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class Note implements Serializable{
 	private String content;
 	private String title;
 	private Date date;
 	private List<Hyperlink> urls;
-	private List<Image> images;
+	private List<ImageModel> images;
 	private UUID id;
 	
 	public Note()
 	{
 		urls = new ArrayList<Hyperlink>();
-		images = new ArrayList<Image>();
+		images = new ArrayList<ImageModel>();
 		id = UUID.randomUUID();
 	}
 	
@@ -48,7 +50,7 @@ public class Note implements Serializable{
 		return urls;		
 	}
 	
-	public List<Image> getImages()
+	public List<ImageModel> getImages()
 	{
 		return images;		
 	}
@@ -73,7 +75,7 @@ public class Note implements Serializable{
 		urls = newUrlSet;		
 	}
 	
-	public void setImages(List<Image> newImageSet)
+	public void setImages(List<ImageModel> newImageSet)
 	{
 		images = newImageSet;		
 	}
@@ -83,7 +85,7 @@ public class Note implements Serializable{
 		urls.add(newHyperlink);		
 	}
 	
-	public void addImage(Image newImage)
+	public void addImage(ImageModel newImage)
 	{
 		images.add(newImage);
 	}
@@ -93,7 +95,7 @@ public class Note implements Serializable{
 		urls.remove(hyperlink);		
 	}
 	
-	public void removeImage(Image image)
+	public void removeImage(ImageView image)
 	{
 		images.remove(image);
 	}

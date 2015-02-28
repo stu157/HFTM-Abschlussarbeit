@@ -2,9 +2,10 @@ package application.note;
 
 import java.util.ResourceBundle;
 
+import application.image.ImageController;
+import application.image.ImageModel;
 import application.interfaces.*;
 import application.main.MainController;
-import application.path.ImageController;
 import application.url.UrlController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -21,6 +22,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -40,13 +42,13 @@ public class NoteController implements Initializable, DialogCallBack
 	@FXML
 	private TextField title;
 	@FXML
-	private ListView<Image> noteImagesList;
+	private ListView<ImageView> noteImagesList;
 	
 	@FXML
 	void newImageCommand(ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			AnchorPane ap = loader.load(getClass().getResource("/application/path/Image.fxml").openStream());
+			AnchorPane ap = loader.load(getClass().getResource("/application/image/Image.fxml").openStream());
 			
 			ImageController controller = (ImageController)loader.getController(); 
 			
@@ -137,11 +139,16 @@ public class NoteController implements Initializable, DialogCallBack
 
 	//Diese Methode stammt aus dem Interface DialogCallBack und wird aus dem ImageController aufgerufen, wenn das Image-Fenster bestätigt wird.
 	@Override
-	public void dialogCallBackMessage(Image image) 
+	public void dialogCallBackMessage(ImageModel image) 
 	{
-		ObservableList<Image> itemList = noteImagesList.getItems();
-		itemList.add(image);
-		noteImagesList.setItems(itemList);
+		ObservableList<ImageView> imageList = noteImagesList.getItems();
+		imageList.add(image.getImageView());
+		noteImagesList.setItems(imageList);
+		
+		selectedNote.addImage(image);
+		
+		SaveNoteCallBack callBack = parentController;
+		register(callBack);
 	}
 	
 	//ChangeListener für TextArea noteContent
