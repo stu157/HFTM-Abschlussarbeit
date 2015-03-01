@@ -63,7 +63,7 @@ public class NoteController implements Initializable, DialogCallBack
 		if(event.getButton().equals(MouseButton.PRIMARY)){
             if(event.getClickCount() == 2){
             	Hyperlink hl = noteUrlList.getSelectionModel().getSelectedItem();
-        		Main.bla.showDocument(hl.getText());
+        		Main.windowsHostServices.showDocument(hl.getText());
             }
         }
 	}
@@ -208,7 +208,7 @@ public class NoteController implements Initializable, DialogCallBack
 			{
 	            @Override
 	            public void handle(ActionEvent t) {
-	            	Main.bla.showDocument(hl.getText());
+	            	Main.windowsHostServices.showDocument(hl.getText());
 	            }
 	        });
 			noteUrlList.itemsProperty().get().add(hl);

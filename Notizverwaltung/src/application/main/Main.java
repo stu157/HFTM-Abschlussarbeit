@@ -16,13 +16,16 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class Main extends Application {
-	public static HostServices bla;
+	public static HostServices windowsHostServices;
 	
+	/**
+	 * Überschreibt die start Methode aus dem Application-Interface und löst den Start der Applikation aus.
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		checkSingleInstance();
 
-		bla = getHostServices();
+		windowsHostServices = getHostServices();
 		
 		/*	Überprüfen ob der Ordner bereits existiert.
 		 *  Wenn nicht wird der Ornder erstllt.
@@ -78,14 +81,26 @@ public class Main extends Application {
 
 	}	
 	
+	/**
+	 * löst den Start der Applikation aus.
+	 * @param args Eingangsparameter
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}
 
+	/**
+	 * Stellt sicher, dass nur eine Instanz der Applikation offen ist.
+	 */
 	private void checkSingleInstance() {
+		//Erzeugt ein RandomAccessFile "flag"
 		final File file = new File("flag");
 		RandomAccessFile randomAccessFile;
-		try {
+		
+		try 
+		{
+			//Ist es der Applikation nicht möglich, das erstellte File zu sperren, zeigt es an, dass bereits eines vorhanden ist.
+			//Dementsprechend wird die Applikation beendet, da bereits eine Instanz geöffnet wurde.
 			randomAccessFile = new RandomAccessFile(file, "rw");
 			final FileLock fileLock = randomAccessFile.getChannel().tryLock();
 

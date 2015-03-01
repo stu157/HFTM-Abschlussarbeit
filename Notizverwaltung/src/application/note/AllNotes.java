@@ -15,16 +15,31 @@ public class AllNotes implements Serializable {
 			+ "\\AppData\\Local\\Notizverwaltung\\";
 	List<Note> allAvailableNotes = new ArrayList<>();
 
-	public List<Note> getAllAvailableNotes() {
+	/**
+	 * Gibt alle erfassten Notizen wider
+	 * @return Liste aller gespeicherten Notizen
+	 */
+	public List<Note> getAllAvailableNotes() 
+	{
 		return allAvailableNotes;
 	}
 
-	public void addNote(Note n) {
+	/**
+	 * Fügt die im Parameter übergebene Notiz zu der kompletten Notiz-Liste hinzu
+	 * @param n neue Notiz
+	 */
+	public void addNote(Note n) 
+	{
 		allAvailableNotes.add(n);
 		saveNotes();
 	}
 
-	public void removeNote(Note noteToRemove) {
+	/**
+	 * Entfernt die im Parameter übergebene Notiz aus der Notiz-Liste 
+	 * @param noteToRemove zu löschende Notiz
+	 */
+	public void removeNote(Note noteToRemove) 
+	{
 		for(Note note : allAvailableNotes)
 		{
 			if(note.getId().equals(noteToRemove.getId()))
@@ -34,6 +49,9 @@ public class AllNotes implements Serializable {
 		saveNotes();
 	}
 
+	/**
+	 * Speichert den aktuellen Stand der Notiz-Liste.
+	 */
 	public void saveNotes() {
 		try {
 			OutputStream output = new FileOutputStream(USERPATH + "notes.dat");
@@ -46,6 +64,10 @@ public class AllNotes implements Serializable {
 		}
 	}
 
+	/**
+	 * übernimmt gemachte Änderungen einer Notiz anhand der Id und speichert diese Änderungen dann auf der Harddisk ab.
+	 * @param newNote geänderte Notiz
+	 */
 	public void saveNote(Note newNote) {
 		for (Note n : allAvailableNotes) {
 			if (n.getId().equals(newNote.getId())) {
@@ -59,6 +81,10 @@ public class AllNotes implements Serializable {
 		saveNotes();
 	}
 
+	/**
+	 * Lädt sämtliche Notizen aus dem Applikationsorder, fügt diese der Notiz-Liste hinzu und gibt sie als Liste zurück
+	 * @return Vollständige Liste der erfassten Notizen.
+	 */
 	public List<Note> loadNotes() {
 
 		try {

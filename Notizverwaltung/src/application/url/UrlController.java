@@ -24,6 +24,11 @@ public class UrlController
 	@FXML
 	private TextField TextEingabe;
 
+	/**
+	 * Wird ausgelöst, wenn der Benutzer auf den OK-Button klickt.
+	 * Schliesst die Ansicht und gibt die eingegebene Url als Callback an den MainController zurück.
+	 * @param event ausgelöstes Event
+	 */
 	@FXML
 	void OkCommand(ActionEvent event) 
 	{
@@ -32,6 +37,11 @@ public class UrlController
 		stage.close();
 	}
 
+	/**
+	 * Wird ausgelöst, wenn der Benutzer auf den abbrechen-Button klickt.
+	 * Schliesst die Url-Eingabe.
+	 * @param event ausgelöstes Event
+	 */
 	@FXML
 	void AbbrechenCommand(ActionEvent event) 
 	{
@@ -39,14 +49,25 @@ public class UrlController
 		stage.close();
 	}
 	
-	public void initData(NoteController controller, Hyperlink oldLink){
+	/**
+	 * Nimmt externe Objekte entgegen die in dieser Instanz gebraucht werden. 
+	 * @param controller NoteController, für die Callbacks benötigt.
+	 * @param oldLink Alter Link der im Falle einer Änderung als Referenz gebraucht wird.
+	 */
+	public void initData(NoteController controller, Hyperlink oldLink)
+	{
 		//Setzt das callBack-Objekt auf den Controller der als Parameter übergeben wird.
     	callBack = controller;
     	this.oldLink = oldLink;
 	}
 
-    //Schickt über das Callback-Objekt vom Interface-Typ DialogCallBack das ausgewählte Bild an die zugewiesene Methode.
-    public void sendCallBack() {
+	
+    /**
+     * Schickt über das Callback-Objekt vom Interface-Typ DialogCallBack die eingegebene Url an die zugewiesene Methode im NoteController.
+     * Nebst dem wird der alte Link übergeben, um das Update des Links durchführen zu können.
+     */
+    public void sendCallBack() 
+    {
         callBack.dialogCallBackMessage(new Hyperlink(TextEingabe.getText()), oldLink);
     }
 
