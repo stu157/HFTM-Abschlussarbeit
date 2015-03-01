@@ -62,6 +62,7 @@ public class MainController implements Initializable, SaveNoteCallBack {
 		}	
 	}
 
+	
 	@FXML
 	void NewNoteCommand(ActionEvent event) {
 		Note note = new Note();
