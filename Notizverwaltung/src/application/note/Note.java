@@ -15,14 +15,14 @@ public class Note implements Serializable{
 	private String content;
 	private String title;
 	private Date date;
-	private List<Hyperlink> urls;
-	private List<ImageModel> images;
+	private List<String> urls;
+	private List<String> images;
 	private UUID id;
 	
 	public Note()
 	{
-		urls = new ArrayList<Hyperlink>();
-		images = new ArrayList<ImageModel>();
+		urls = new ArrayList<String>();
+		images = new ArrayList<String>();
 		id = UUID.randomUUID();
 	}
 	
@@ -45,12 +45,12 @@ public class Note implements Serializable{
 		return title;		
 	}
 	
-	public List<Hyperlink> getUrls()
+	public List<String> getUrls()
 	{
 		return urls;		
 	}
 	
-	public List<ImageModel> getImages()
+	public List<String> getImages()
 	{
 		return images;		
 	}
@@ -70,32 +70,32 @@ public class Note implements Serializable{
 		title = newTitle;		
 	}
 	
-	public void setUrls(List<Hyperlink> newUrlSet)
+	public void setUrls(List<String> newUrlSet)
 	{
 		urls = newUrlSet;		
 	}
 	
-	public void setImages(List<ImageModel> newImageSet)
+	public void setImages(List<String> newImageSet)
 	{
 		images = newImageSet;		
 	}
 	
-	public void addUrl(Hyperlink newHyperlink)
+	public void addUrl(String newHyperlink)
 	{
 		urls.add(newHyperlink);		
 	}
 	
-	public void addImage(ImageModel newImage)
+	public void addImage(String newImage)
 	{
 		images.add(newImage);
 	}
 	
-	public void removeUrl(Hyperlink hyperlink)
+	public void removeUrl(String hyperlink)
 	{
 		urls.remove(hyperlink);		
 	}
 	
-	public void removeImage(ImageView image)
+	public void removeImage(String image)
 	{
 		images.remove(image);
 	}

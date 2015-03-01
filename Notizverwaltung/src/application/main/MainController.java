@@ -60,6 +60,7 @@ public class MainController implements Initializable, SaveNoteCallBack {
 		Note note = new Note();
 		note.setTitle("Neue Notiz");
 		note.setContent("");
+		
 		// Datum hinzufügen
 		note.setDate(new Date());
 		// Note in Note-Collection einfügen
@@ -77,16 +78,24 @@ public class MainController implements Initializable, SaveNoteCallBack {
 	@Override
 	public void initialize(java.net.URL arg0, ResourceBundle arg1) 
 	{
-		for (Note n : allNotes.loadNotes()) {
-			noteListProperty.add(new Note(n));
-		}
-
+		loadNoteList();
 		setFilterListener();
 		setSelectedItemChangeListener();
 		loadNoteView();
 		NotesList.itemsProperty().bind(noteListProperty);
 	}
 
+	private void loadNoteList()
+	{
+		int selectedIndex = NotesList.getSelectionModel().getSelectedIndex();
+		noteListProperty = new SimpleListProperty(FXCollections.<String> observableArrayList());
+		for (Note n : allNotes.loadNotes()) 
+			noteListProperty.add(new Note(n));
+		
+		NotesList.itemsProperty().bind(noteListProperty);
+		NotesList.getSelectionModel().select(selectedIndex);
+	}
+	
 	private void loadNoteView()
 	{
 		try {
@@ -138,28 +147,34 @@ public class MainController implements Initializable, SaveNoteCallBack {
 	}
 	
 	
-	private void setSelectedItemChangeListener() {
+	private void setSelectedItemChangeListener() 
+	{
 		NotesList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Note>() 
 		{
 			@Override
 			public void changed(ObservableValue<? extends Note> observable, Note oldValue, Note newValue) 
 			{
-				Note selectedNote = NotesList.getSelectionModel().getSelectedItem();
-	
-				// Damit nach dem sortieren keine nullPointerException
-				// entsteht
-				// Wenn selectedNote==null, dann wird die selection auf
-				// die "nullte" note gesetzt.
-				if (selectedNote == null) 
-					noteController.setSelectedNote(new Note());
-				else
-					noteController.setSelectedNote(selectedNote);
+				if(noteListProperty.get().size() > 0)
+				{
+					Note selectedNote = NotesList.getSelectionModel().getSelectedItem();
+		
+					// Damit nach dem sortieren keine nullPointerException
+					// entsteht
+					// Wenn selectedNote==null, dann wird die selection auf
+					// die "nullte" note gesetzt.
+					if (selectedNote == null) 
+						noteController.setSelectedNote(new Note(), true);
+					else
+						noteController.setSelectedNote(selectedNote, true);
+				}
 			}
 		});
 	}
 
 	@Override
-	public void saveNoteCallback() {
+	public void saveNoteCallback() 
+	{
 		allNotes.saveNote(noteController.getSelectedNote());
+		loadNoteList();
 	}
 }

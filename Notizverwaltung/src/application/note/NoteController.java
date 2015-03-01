@@ -1,5 +1,7 @@
 package application.note;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import application.image.ImageController;
@@ -100,10 +102,29 @@ public class NoteController implements Initializable, DialogCallBack
 			parentController = mc;
 	}
 	
-	public void setSelectedNote(Note newNote) {
+	private boolean selectionChanged = false;
+	public void setSelectedNote(Note newNote, boolean sc) {
+		selectionChanged = sc;
+		
 		selectedNote = newNote;
 		noteContent.setText(selectedNote.getContent());
 		title.setText(selectedNote.getTitle());
+		
+		noteImagesList.getItems().clear();
+		List<String> imageUrls = selectedNote.getImages();
+		for(String s : imageUrls)
+		{
+			noteImagesList.itemsProperty().get().add(new ImageView(new Image(s, 100, 100, true, true)));		
+		}
+		
+		noteUrlList.getItems().clear();
+		List<String> urls = selectedNote.getUrls();
+		for(String hl : urls)
+		{
+			noteUrlList.itemsProperty().get().add(new Hyperlink(hl));		
+		}
+		
+		selectionChanged = false;
 	}
 
 	public Note getSelectedNote() {
@@ -135,6 +156,11 @@ public class NoteController implements Initializable, DialogCallBack
 		ObservableList<Hyperlink> itemList = noteUrlList.getItems();
 		itemList.add(link);
 		noteUrlList.setItems(itemList);
+		
+		selectedNote.addUrl(link.getText());
+		
+		SaveNoteCallBack callBack = parentController;
+		register(callBack);
 	}
 
 	//Diese Methode stammt aus dem Interface DialogCallBack und wird aus dem ImageController aufgerufen, wenn das Image-Fenster bestätigt wird.
@@ -145,7 +171,7 @@ public class NoteController implements Initializable, DialogCallBack
 		imageList.add(image.getImageView());
 		noteImagesList.setItems(imageList);
 		
-		selectedNote.addImage(image);
+		selectedNote.addImage(image.getImageUrl());
 		
 		SaveNoteCallBack callBack = parentController;
 		register(callBack);
@@ -159,6 +185,9 @@ public class NoteController implements Initializable, DialogCallBack
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
 			{
+				if(selectionChanged)
+					return;
+					
 				selectedNote.setContent(noteContent.getText());
 				//parentController.saveChanges();
 				
@@ -176,6 +205,9 @@ public class NoteController implements Initializable, DialogCallBack
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
 			{
+				if(selectionChanged)
+					return;
+				
 				selectedNote.setTitle(title.getText());
 				//parentController.saveChanges();
 				

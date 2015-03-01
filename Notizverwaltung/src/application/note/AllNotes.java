@@ -61,6 +61,7 @@ public class AllNotes implements Serializable {
 	public List<Note> loadNotes() {
 
 		try {
+			allAvailableNotes.clear();
 			InputStream input = new FileInputStream(USERPATH + "notes.dat");
 			ObjectInputStream ois = new ObjectInputStream(input);
 			Object o = ois.readObject();
