@@ -300,7 +300,17 @@ public class MainController implements Initializable, SaveNoteCallBack {
 		if(sortDirection == sortDirection.Descending)
 			sortDescending();
 		
-		NotesList.getSelectionModel().select(previouslySelectedItem);	
+		if(Filter.isSelected())
+		{
+			FilterText.textProperty().set(FilterText.textProperty().get() + "ProvokeEvent");
+			FilterText.textProperty().set(FilterText.textProperty().get().replace("ProvokeEvent", ""));
+		}
+		
+		MultipleSelectionModel msm = NotesList.getSelectionModel();
+		msm.clearSelection();
+		msm.select(previouslySelectedItem);
+		//NotesList.getSelectionModel().select(previouslySelectedItem);
+		
 		setNoteCounter();
 	}
 }
