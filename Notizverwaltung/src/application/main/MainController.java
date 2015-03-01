@@ -1,6 +1,8 @@
 package application.main;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -9,6 +11,7 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,9 +19,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import Enums.SortDirection;
 import application.interfaces.SaveNoteCallBack;
 import application.note.AllNotes;
 import application.note.Note;
@@ -31,7 +36,8 @@ public class MainController implements Initializable, SaveNoteCallBack {
 	private NoteController noteController;
 	// Um den Filter ein und aus zu schalten
 	private SimpleBooleanProperty filterBooleanProperty = new SimpleBooleanProperty();
-
+	private SortDirection sortDirection;
+	
 	// Selection-View-Properties
 	@FXML private Button DeleteNote;
 	@FXML private Button NewNote;
@@ -39,6 +45,7 @@ public class MainController implements Initializable, SaveNoteCallBack {
 	@FXML private BorderPane ContentPane;
 	@FXML private CheckBox Filter;
 	@FXML private TextField FilterText;
+	@FXML private Label NoteCounter;
 	
 	@FXML
 	void FilterSwitched(ActionEvent event)
@@ -66,14 +73,28 @@ public class MainController implements Initializable, SaveNoteCallBack {
 		// Note in Note-Collection einfügen
 		noteListProperty.add(note);
 		allNotes.addNote(note);
-		
+		setNoteCounter();
 	}
 
 	@FXML
 	void DeleteNoteCommand(ActionEvent event) {
 		allNotes.removeNote(noteController.getSelectedNote());
 		noteListProperty.remove(noteController.getSelectedNote());
+		setNoteCounter();
 	}
+	
+	@FXML
+	void SortDescendingCommand(ActionEvent event)
+	{
+		sortDescending();
+	}
+	
+	@FXML
+	void SortAscendingCommand(ActionEvent event)
+	{
+		sortAscending();
+	}
+	
 	
 	@Override
 	public void initialize(java.net.URL arg0, ResourceBundle arg1) 
@@ -94,6 +115,8 @@ public class MainController implements Initializable, SaveNoteCallBack {
 		
 		NotesList.itemsProperty().bind(noteListProperty);
 		NotesList.getSelectionModel().select(selectedIndex);
+
+		setNoteCounter();
 	}
 	
 	private void loadNoteView()
@@ -114,11 +137,46 @@ public class MainController implements Initializable, SaveNoteCallBack {
 		}		
 	}
 	
+
+	
+	void sortDescending()
+	{
+		Note previouslySelectedItem = NotesList.getSelectionModel().getSelectedItem();
+		
+		ObservableList<Note> itemList = NotesList.getItems();
+		Collections.sort(itemList, new Comparator<Note>()
+		{
+			@Override
+			public int compare(Note n1, Note n2)
+			{
+				return n1.getTitle().compareTo(n2.getTitle());				
+			}
+		});
+		
+		NotesList.getSelectionModel().select(previouslySelectedItem);
+		sortDirection = SortDirection.Descending;
+	}
+	
+	void sortAscending()
+	{
+		Note previouslySelectedItem = NotesList.getSelectionModel().getSelectedItem();
+		
+		ObservableList<Note> itemList = NotesList.getItems();		
+		Collections.sort(itemList, new Comparator<Note>()
+		{
+			@Override
+			public int compare(Note n1, Note n2)
+			{
+				return n2.getTitle().compareTo(n1.getTitle());				
+			}
+		});
+		
+		NotesList.getSelectionModel().select(previouslySelectedItem);
+		sortDirection = SortDirection.Ascending;
+	}	
+	
 	private void setFilterListener()
 	{
-		//FilteredList<Note> filteredData = new FilteredList<>(noteListProperty, auswahl -> true);
-		
-		// 2. Set the filter Predicate whenever the filter changes.
 		FilterText.textProperty().addListener((observable, oldValue, newValue) -> 
 		{
 			FilteredList<Note> filteredData = new FilteredList<>(noteListProperty, auswahl -> true);
@@ -126,17 +184,15 @@ public class MainController implements Initializable, SaveNoteCallBack {
 			{
 				filteredData.setPredicate(auswahl -> 
 				{
-	
-				// zeigt alles an
 					if (newValue == null || newValue.isEmpty() || filterBooleanProperty.getValue().booleanValue()) 
 						return true;
-					// compare with filter text
+
 					String lowerCaseFilter = newValue.toLowerCase();
 	
-					if (auswahl.getTitle().toLowerCase().indexOf(lowerCaseFilter) != -1)
-						return true; // Filter matches
+					if (auswahl.getTitle().toLowerCase().indexOf(lowerCaseFilter) != -1 || auswahl.getContent().toLowerCase().indexOf(lowerCaseFilter) != -1)
+						return true; 
 					else
-						return false; // Does not match
+						return false; 
 				});
 
 				SimpleListProperty<Note> sortedData = new SimpleListProperty<>(filteredData);
@@ -147,6 +203,11 @@ public class MainController implements Initializable, SaveNoteCallBack {
 		});	
 	}
 	
+	private void setNoteCounter()
+	{
+		int size = noteListProperty.getSize();
+		NoteCounter.setText(Integer.toString(size));		
+	}
 	
 	private void setSelectedItemChangeListener() 
 	{
@@ -175,7 +236,17 @@ public class MainController implements Initializable, SaveNoteCallBack {
 	@Override
 	public void saveNoteCallback() 
 	{
+		Note previouslySelectedItem = NotesList.getSelectionModel().getSelectedItem();
+		
 		allNotes.saveNote(noteController.getSelectedNote());
-		loadNoteList();
+		loadNoteList();		
+		
+		if(sortDirection == sortDirection.Ascending)
+			sortAscending();
+		if(sortDirection == sortDirection.Descending)
+			sortDescending();
+		
+		NotesList.getSelectionModel().select(previouslySelectedItem);	
+		setNoteCounter();
 	}
 }
