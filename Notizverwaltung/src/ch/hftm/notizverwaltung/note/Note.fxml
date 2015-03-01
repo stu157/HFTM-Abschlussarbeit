@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="424.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.hftm.notizverwaltung.note.NoteController">
+   <center>
+      <AnchorPane prefHeight="317.0" prefWidth="350.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextArea fx:id="noteContent" prefHeight="317.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+   </center>
+   <right>
+      <ListView fx:id="noteImagesList" prefHeight="317.0" prefWidth="120.0" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+   </bottom>
+   <bottom>
+      <AnchorPane prefHeight="125.0" prefWidth="470.0">
+         <children>
+            <AnchorPane layoutX="354.0" prefHeight="200.0" prefWidth="110.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+   	               <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="118.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+      	                     <Button fx:id="newImage" mnemonicParsing="false" onAction="#newImageCommand" prefHeight="25.0" prefWidth="100.0" text="Neues Bild">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+      	                     </Button>
+                        <Button fx:id="modifyImage" mnemonicParsing="false" onAction="#modifyImageCommand" prefHeight="25.0" prefWidth="100.0" text="Bild bearbeiten">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="deleteImage" mnemonicParsing="false" onAction="#deleteImageCommand" prefHeight="25.0" prefWidth="100.0" text="Bild löschen" />
+                     </children>
+   	              </VBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="104.0" prefWidth="338.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="0.0">
+               <children>
+   	            <ListView fx:id="noteUrlList" onMouseReleased="#linkClicked" prefHeight="129.0" prefWidth="247.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="103.0" AnchorPane.topAnchor="0.0" />
+                  <VBox alignment="CENTER" layoutX="236.0" prefHeight="129.0" prefWidth="100.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+   	                     <Button fx:id="newUrl" mnemonicParsing="false" onAction="#newUrlCommand" prefHeight="25.0" prefWidth="100.0" text="Neue Url">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin></Button>
+                        <Button fx:id="modifyUrl" mnemonicParsing="false" onAction="#modifyUrlCommand" prefWidth="100.0" text="Url bearbeiten">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="deleteUrl" mnemonicParsing="false" onAction="#deleteUrlCommand" prefWidth="100.0" text="Url löschen" />
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </bottom>
+   <top>
+      <AnchorPane prefHeight="24.0" prefWidth="470.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="title" prefHeight="25.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="0.0" />
+            <Label fx:id="date" layoutX="351.0" layoutY="4.0" prefHeight="17.0" prefWidth="168.0" AnchorPane.rightAnchor="0.0" />
+         </children>
+      </AnchorPane>
+   </top>
+</BorderPane>

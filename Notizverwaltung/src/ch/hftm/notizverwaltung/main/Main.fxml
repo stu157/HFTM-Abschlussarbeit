@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="contentPane" minHeight="400.0" minWidth="-Infinity" prefHeight="400.0" prefWidth="635.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.hftm.notizverwaltung.main.MainController">
+   <left>
+      <AnchorPane minHeight="303.0" minWidth="300.0" prefHeight="400.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane layoutY="410.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="114.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <Button fx:id="newNote" minHeight="25.0" minWidth="90.0" mnemonicParsing="false" onAction="#NewNoteCommand" prefHeight="25.0" prefWidth="90.0" text="Neue Notiz" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="14.0" />
+                  <Button fx:id="deleteNote" minHeight="25.0" minWidth="90.0" mnemonicParsing="false" onAction="#DeleteNoteCommand" prefHeight="25.0" prefWidth="90.0" text="Lösche Notiz" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="14.0" />
+                  <CheckBox fx:id="filter" layoutX="194.0" layoutY="23.0" mnemonicParsing="false" onAction="#FilterSwitched" prefHeight="17.0" prefWidth="84.0" text="Filter Ein" AnchorPane.bottomAnchor="59.0" AnchorPane.rightAnchor="22.0" />
+                  <TextField fx:id="filterText" prefHeight="25.0" prefWidth="148.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="14.0" />
+                  <Button fx:id="sortAscending" layoutX="110.0" layoutY="63.0" mnemonicParsing="false" onAction="#SortAscendingCommand" prefHeight="25.0" prefWidth="30.0" text="Λ" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="110.0" />
+                  <Button fx:id="sortDescending" layoutX="162.0" layoutY="63.0" mnemonicParsing="false" onAction="#SortDescendingCommand" prefHeight="25.0" prefWidth="30.0" text="V" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="108.0" />
+                  <Label fx:id="noteCounter" layoutX="107.0" layoutY="14.0" prefHeight="17.0" prefWidth="22.0" text="0" />
+                  <Label layoutX="14.0" layoutY="14.0" text="Anzahl Notizen:" />
+               </children>
+            </AnchorPane>
+          <AnchorPane prefHeight="287.0" prefWidth="300.0" AnchorPane.bottomAnchor="113.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ListView fx:id="notesList" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </left>
+</BorderPane>

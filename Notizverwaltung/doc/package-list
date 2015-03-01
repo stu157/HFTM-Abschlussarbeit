@@ -1,6 +1,6 @@
-application.enumerations
-application.image
-application.interfaces
-application.main
-application.note
-application.url
+ch.hftm.notizverwaltung.enumerations
+ch.hftm.notizverwaltung.image
+ch.hftm.notizverwaltung.interfaces
+ch.hftm.notizverwaltung.main
+ch.hftm.notizverwaltung.note
+ch.hftm.notizverwaltung.url
