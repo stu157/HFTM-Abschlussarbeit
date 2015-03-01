@@ -53,7 +53,7 @@ public class MainController implements Initializable, SaveNoteCallBack {
 	 * @param event Das Event das ausgelöst wurde
 	 */
 	@FXML
-	void FilterSwitched(ActionEvent event)
+	void filterSwitched(ActionEvent event)
 	{
 		if(filter.isSelected())
 		{
@@ -73,7 +73,7 @@ public class MainController implements Initializable, SaveNoteCallBack {
 	 * @param event Das Event das ausgelöst wurde
 	 */
 	@FXML
-	void NewNoteCommand(ActionEvent event) {
+	void newNoteCommand(ActionEvent event) {
 		Note note = new Note();
 		note.setTitle("Neue Notiz");
 		note.setContent("");
@@ -91,7 +91,7 @@ public class MainController implements Initializable, SaveNoteCallBack {
 	 * @param event Das Event das ausgelöst wurde
 	 */
 	@FXML
-	void DeleteNoteCommand(ActionEvent event) {
+	void deleteNoteCommand(ActionEvent event) {
 		allNotes.removeNote(noteController.getSelectedNote());
 		noteListProperty.remove(noteController.getSelectedNote());
 		setNoteCounter();
@@ -102,7 +102,7 @@ public class MainController implements Initializable, SaveNoteCallBack {
 	 * @param event Das Event das ausgelöst wurde
 	 */
 	@FXML
-	void SortDescendingCommand(ActionEvent event)
+	void sortDescendingCommand(ActionEvent event)
 	{
 		sortDescending();
 	}
@@ -112,7 +112,7 @@ public class MainController implements Initializable, SaveNoteCallBack {
 	 * @param event Das Event das ausgelöst wurde
 	 */
 	@FXML
-	void SortAscendingCommand(ActionEvent event)
+	void sortAscendingCommand(ActionEvent event)
 	{
 		sortAscending();
 	}

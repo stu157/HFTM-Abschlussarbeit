@@ -31,7 +31,7 @@ public class ImageController
 	 * @param event ausgelöstes Event
 	 */
     @FXML
-    void OkCommand(ActionEvent event) 
+    void okCommand(ActionEvent event) 
     {
     	sendCallBack();
     	Stage stage = (Stage) abbrechenButton.getScene().getWindow();
@@ -44,7 +44,7 @@ public class ImageController
 	 * @param event ausgelöstes Event
 	 */
     @FXML
-    void AbbrechenCommand(ActionEvent event) {
+    void abbrechenCommand(ActionEvent event) {
     	Stage stage = (Stage) abbrechenButton.getScene().getWindow();
 		stage.close();
     }
@@ -54,7 +54,7 @@ public class ImageController
      * @param event ausgelöstes Event
      */
     @FXML
-    void FileChooserCommand(ActionEvent event) {
+    void fileChooserCommand(ActionEvent event) {
     	fc.setTitle("Open File");
     	fc.getExtensionFilters().add(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
         File file = fc.showOpenDialog(new Stage());

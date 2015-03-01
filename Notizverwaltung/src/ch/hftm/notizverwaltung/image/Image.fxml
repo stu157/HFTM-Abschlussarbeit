@@ -6,10 +6,10 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="145.0" prefWidth="415.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.hftm.notizverwaltung.image.ImageController">
    <children>
-      <Button fx:id="okButton" layoutX="101.0" layoutY="98.0" mnemonicParsing="false" onAction="#OkCommand" prefHeight="25.0" prefWidth="73.0" text="OK" />
-      <Button fx:id="abbrechenButton" layoutX="240.0" layoutY="98.0" mnemonicParsing="false" onAction="#AbbrechenCommand" text="Abbrechen" />
+      <Button fx:id="okButton" layoutX="101.0" layoutY="98.0" mnemonicParsing="false" onAction="#okCommand" prefHeight="25.0" prefWidth="73.0" text="OK" />
+      <Button fx:id="abbrechenButton" layoutX="240.0" layoutY="98.0" mnemonicParsing="false" onAction="#abbrechenCommand" text="Abbrechen" />
       <TextField fx:id="imagePath" layoutX="45.0" layoutY="48.0" prefHeight="25.0" prefWidth="295.0" />
-      <Button fx:id="fileChooserButton" layoutX="340.0" layoutY="48.0" mnemonicParsing="false" onAction="#FileChooserCommand" prefHeight="25.0" prefWidth="22.0" text="..." />
+      <Button fx:id="fileChooserButton" layoutX="340.0" layoutY="48.0" mnemonicParsing="false" onAction="#fileChooserCommand" prefHeight="25.0" prefWidth="22.0" text="..." />
       <Label layoutX="45.0" layoutY="14.0" prefHeight="17.0" prefWidth="105.0" text="Bild hinzufügen" />
    </children>
 </AnchorPane>
