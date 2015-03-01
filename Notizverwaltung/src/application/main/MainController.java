@@ -116,11 +116,12 @@ public class MainController implements Initializable, SaveNoteCallBack {
 	
 	private void setFilterListener()
 	{
-		FilteredList<Note> filteredData = new FilteredList<>(noteListProperty, auswahl -> true);
+		//FilteredList<Note> filteredData = new FilteredList<>(noteListProperty, auswahl -> true);
 		
 		// 2. Set the filter Predicate whenever the filter changes.
 		FilterText.textProperty().addListener((observable, oldValue, newValue) -> 
 		{
+			FilteredList<Note> filteredData = new FilteredList<>(noteListProperty, auswahl -> true);
 			if(Filter.isSelected())
 			{
 				filteredData.setPredicate(auswahl -> 
@@ -157,7 +158,7 @@ public class MainController implements Initializable, SaveNoteCallBack {
 				if(noteListProperty.get().size() > 0)
 				{
 					Note selectedNote = NotesList.getSelectionModel().getSelectedItem();
-		
+					
 					// Damit nach dem sortieren keine nullPointerException
 					// entsteht
 					// Wenn selectedNote==null, dann wird die selection auf

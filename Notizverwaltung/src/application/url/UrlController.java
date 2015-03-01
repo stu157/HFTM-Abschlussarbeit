@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 public class UrlController 
 {
 	private DialogCallBack callBack;
+	private Hyperlink oldLink;
 	
 	@FXML
 	private Button OkButton;
@@ -38,14 +39,15 @@ public class UrlController
 		stage.close();
 	}
 	
-	public void initData(NoteController controller){
+	public void initData(NoteController controller, Hyperlink oldLink){
 		//Setzt das callBack-Objekt auf den Controller der als Parameter übergeben wird.
     	callBack = controller;
+    	this.oldLink = oldLink;
 	}
 
     //Schickt über das Callback-Objekt vom Interface-Typ DialogCallBack das ausgewählte Bild an die zugewiesene Methode.
     public void sendCallBack() {
-        callBack.dialogCallBackMessage(new Hyperlink(TextEingabe.getText()));
+        callBack.dialogCallBackMessage(new Hyperlink(TextEingabe.getText()), oldLink);
     }
 
 }

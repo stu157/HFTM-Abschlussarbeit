@@ -5,6 +5,7 @@ import java.io.RandomAccessFile;
 import java.nio.channels.FileLock;
 
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -15,10 +16,14 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class Main extends Application {
+	public static HostServices bla;
+	
 	@Override
 	public void start(Stage primaryStage) {
 		checkSingleInstance();
 
+		bla = getHostServices();
+		
 		/*	Überprüfen ob der Ordner bereits existiert.
 		 *  Wenn nicht wird der Ornder erstllt.
 		 */
@@ -71,8 +76,8 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 
-	}
-
+	}	
+	
 	public static void main(String[] args) {
 		launch(args);
 	}

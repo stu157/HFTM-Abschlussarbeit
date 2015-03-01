@@ -51,6 +51,7 @@ public class AllNotes implements Serializable {
 			if (n.getId().equals(newNote.getId())) {
 				n.setContent(newNote.getContent());
 				n.setTitle(newNote.getTitle());
+				n.setDate(newNote.getDate());
 				n.setImages(newNote.getImages());
 				n.setUrls(newNote.getUrls());
 			}

@@ -18,6 +18,7 @@ public class ImageController
 {
 	private DialogCallBack callBack;
 	FileChooser fc = new FileChooser();
+	ImageModel oldImage;
 	
     @FXML
     private Button OkButton;
@@ -58,15 +59,16 @@ public class ImageController
         } 
     }
 
-	public void initData(NoteController controller) 
+	public void initData(NoteController controller, ImageModel oldImage) 
 	{
 		//Setzt das callBack-Objekt auf den Controller der als Parameter übergeben wird.
 		callBack = controller;
+		this.oldImage = oldImage;
 	}
 	
 	//Schickt über das Callback-Objekt vom Interface-Typ DialogCallBack die eingegebene URL an die zugewiesene Methode.
     public void sendCallBack() {
     	ImageModel il = new ImageModel("File:" + ImagePath.textProperty().get());
-        callBack.dialogCallBackMessage(il);
+        callBack.dialogCallBackMessage(il, oldImage);
     }
 }

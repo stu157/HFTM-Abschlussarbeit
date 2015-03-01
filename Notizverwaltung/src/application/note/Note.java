@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.UUID;
 
 import application.image.ImageModel;
+import application.main.Main;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,6 +31,7 @@ public class Note implements Serializable{
 	
 	public Note(Note n)
 	{
+		date = n.getDate();
 		content = n.getContent();
 		title = n.getTitle();
 		urls = n.getUrls();
@@ -46,7 +50,7 @@ public class Note implements Serializable{
 	}
 	
 	public List<String> getUrls()
-	{
+	{		
 		return urls;		
 	}
 	
@@ -101,7 +105,7 @@ public class Note implements Serializable{
 	}
 	
 	public Date getDate() {
-		return date;
+		return date == null ? new Date() : date;
 	}
 
 	public void setDate(Date date) {
